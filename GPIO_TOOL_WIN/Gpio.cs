@@ -1,65 +1,74 @@
-﻿using System;
+﻿using OpenLibSys;
+using System;
 
 namespace GPIO_TOOL_WIN
 {
-    class Gpio
+    internal class Gpio
     {
-        private static OpenLibSys.Ols MyOls;
-        public static string gpbase = "a07";
+        private static Ols _ols;
+        private byte _addresPort = 0x2e;
+        private byte _dataPort = 0x2f;
+        private ushort _gpioBaseAddress = 0;
+        private ushort _gpioSet_6_Address = 0;
+        //public static string gpbase = "a07";
 
         public bool Initialize()
         {
-            MyOls = new OpenLibSys.Ols();
-            return MyOls.GetStatus() == (uint)OpenLibSys.Ols.Status.NO_ERROR;
+            _ols = new Ols();
+            return _ols.GetStatus() == (uint)Ols.Status.NO_ERROR;
         }
 
         public void ExitSuperIo()
         {
-            if (MyOls != null)
+            if (_ols != null)
             {
-                MyOls.WriteIoPortByte(0x2e, 0x02);
-                MyOls.WriteIoPortByte(0x2f, 0x02);
+                _ols.WriteIoPortByte(0x2e, 0x02);
+                _ols.WriteIoPortByte(0x2f, 0x02); //
             }
-            
         }
 
         public void InitSuperIO()
         {
-            MyOls.WriteIoPortByte(0x2e, 0x87);
-            MyOls.WriteIoPortByte(0x2e, 0x01);
-            MyOls.WriteIoPortByte(0x2e, 0x55);
-            MyOls.WriteIoPortByte(0x2e, 0x55);
+            //Enter MB PnP Mode
+            _ols.WriteIoPortByte(0x2e, 0x87);
+            _ols.WriteIoPortByte(0x2e, 0x01);
+            _ols.WriteIoPortByte(0x2e, 0x55);
+            _ols.WriteIoPortByte(0x2e, 0x55);
         }
 
         public void InitGpioReg()
         {
-            //select logic device
-            MyOls.WriteIoPortByte(0x2e, 0x07);
-            MyOls.WriteIoPortByte(0x2f, 0x07);
-            //Speecial Function Selection Register3(Index=2Ch, Default=89h)
-            MyOls.WriteIoPortByte(0x2e, 0x2c);
-            MyOls.WriteIoPortByte(0x2f, 0x89);
-            Console.WriteLine("init gpio end ...");
-        }
+            //GPIO Set 5 Multi-Function Pin Selection Register (Index=29h, Default=00h)
+            _ols.WriteIoPortByte(0x2e, 0x29);
+            _ols.WriteIoPortByte(0x2f, 0x80); //GP63~GP67 Enabled by Index 29h <bit 7> = 1
 
-        public int SuperIoInw(byte data)
-        {
-            int val;
-            MyOls.WriteIoPortByte(0x2e, data++);
-            val = MyOls.ReadIoPortByte(0x2f) << 8;
-            Console.WriteLine("SuperIo_Inw  val1:" + Convert.ToString(val, 16));
-            MyOls.WriteIoPortByte(0x2e, data);
-            val |= MyOls.ReadIoPortByte(0x2f);
-            Console.WriteLine("SuperIo_Inw  val2:" + Convert.ToString(val, 16));
-            return val;
+            Console.WriteLine("init gpio end ...");
         }
 
         public string GetChipName()
         {
-            ushort chip_type;
-            chip_type = (ushort)SuperIoInw(0x20);
-            Console.WriteLine("chip type :" + Convert.ToString(chip_type, 16));
-            return "IT" + Convert.ToString(chip_type, 16);
+            int val;
+            _ols.WriteIoPortByte(0x2e, 0x20); //Chip ID Byte 1 (Index=20h, Default=87h)
+            val = _ols.ReadIoPortByte(0x2f) << 8;
+            _ols.WriteIoPortByte(0x2e, 0x21); //Chip ID Byte 2 (Index=21h, Default=28h)
+            val |= _ols.ReadIoPortByte(0x2f);
+            Console.WriteLine("chip type :" + Convert.ToString(val, 16));
+            return "IT" + Convert.ToString(val, 16);
+        }
+
+        public void GetEcBaseAddress()
+        {
+            _ols.WriteIoPortByte(0x2e, 0x07); //Logical Device Number (LDN, Index=07h) used to select logical devices
+            _ols.WriteIoPortByte(0x2f, 0x07); //GPIO Configuration Registers (LDN=07h)
+
+            int val;
+            _ols.WriteIoPortByte(0x2e, 0x62); //Simple I/O Base Address MSB Register (Index=62h, Default=00h)
+            val = _ols.ReadIoPortByte(0x2f) << 8;
+            _ols.WriteIoPortByte(0x2e, 0x63); //Simple I/O Base Address LSB Register (Index=63h, Default=00h)
+            val |= _ols.ReadIoPortByte(0x2f);
+
+            _gpioBaseAddress = (ushort)val;
+            _gpioSet_6_Address = (ushort)(val + 0x05);
         }
 
         public byte ReadGpioMode()
@@ -67,23 +76,10 @@ namespace GPIO_TOOL_WIN
             byte b = 0;
             try
             {
-                MyOls.WriteIoPortByte(0x2e, 0xcf);
-                b = MyOls.ReadIoPortByte(0x2f);
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show("An error occured:\n" + ex.Message);
-            }
-            return b;
-        }
-
-        public byte ReadGpioVal()
-        {
-            byte b = 0;
-            try
-            {
-                //MyOls.WriteIoPortByte(0x2e, 0xcf);
-                b = MyOls.ReadIoPortByte(Convert.ToUInt16(Gpio.gpbase, 16));
+                //Simple I/O Set 1, 2, 3, 4, 5, 6, 7 and 8 Output Enable Registers
+                //(Index=C8h, C9h, CAh, CBh, CCh, CDh, CEh and CFh, Default = 01h, 00h, 00h, 40h, 00h, 00h, 00h and 00h)
+                _ols.WriteIoPortByte(0x2e, 0xcd);
+                b = _ols.ReadIoPortByte(0x2f);
             }
             catch (Exception ex)
             {
@@ -96,21 +92,36 @@ namespace GPIO_TOOL_WIN
         {
             try
             {
-                MyOls.WriteIoPortByte(0x2e, 0xcf);
-                MyOls.WriteIoPortByte(0x2f, b);
+                _ols.WriteIoPortByte(0x2e, 0xcd);
+                _ols.WriteIoPortByte(0x2f, b);
             }
             catch (Exception ex)
             {
                 System.Windows.MessageBox.Show("An error occured:\n" + ex.Message);
             }
-            
         }
+
+
+        public byte ReadGpioVal()
+        {
+            byte b = 0;
+            try
+            {
+                b = _ols.ReadIoPortByte(_gpioSet_6_Address);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("An error occured:\n" + ex.Message);
+            }
+            return b;
+        }
+
 
         public void SetGpioOutValue(byte b)
         {
             try
             {
-                MyOls.WriteIoPortByte(Convert.ToUInt16(Gpio.gpbase, 16), b);
+                _ols.WriteIoPortByte(_gpioSet_6_Address, b);
             }
             catch (Exception ex)
             {

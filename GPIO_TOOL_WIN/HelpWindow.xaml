@@ -12,23 +12,22 @@
             <FlowDocument>
                 <Paragraph>
                     <InlineUIContainer>
-                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="{DynamicResource help_0}" Width="350" FontSize="14" FontWeight="Bold"/>
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="{DynamicResource help_0}" Width="350" FontSize="14" FontWeight="Bold" />
                     </InlineUIContainer>
                     <InlineUIContainer>
-                        <TextBlock TextWrapping="Wrap" Margin="0,20" Text="{DynamicResource help_1}" Width="350" FontSize="14"/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,20" Text="{DynamicResource help_1}" Width="350" FontSize="14" />
                     </InlineUIContainer>
                     <InlineUIContainer>
-                        <TextBlock TextWrapping="Wrap" Text="{DynamicResource help_2}" Width="350" FontSize="14"/>
+                        <TextBlock TextWrapping="Wrap" Text="{DynamicResource help_2}" Width="350" FontSize="14" />
                     </InlineUIContainer>
                     <InlineUIContainer>
-                        <TextBlock TextWrapping="Wrap" Margin="0,20" Text="{DynamicResource help_3}" Width="350" FontSize="14"/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,20" Text="{DynamicResource help_3}" Width="350" FontSize="14" />
                     </InlineUIContainer>
                     <InlineUIContainer>
-                        <TextBlock TextWrapping="Wrap" Text="{DynamicResource help_4}" Width="350" FontSize="14"/>
+                        <TextBlock TextWrapping="Wrap" Text="{DynamicResource help_4}" Width="350" FontSize="14" />
                     </InlineUIContainer>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-
     </Grid>
 </Window>

@@ -15,7 +15,7 @@
     <s:String x:Key="set_val">设置电压</s:String>
     <s:String x:Key="chip_name">芯片型号:</s:String>
     <s:String x:Key="error">驱动加载失败！请用管理员权限</s:String>
-    
+
     <s:String x:Key="app_name">GPIO工具</s:String>
     <s:String x:Key="app_version">版本号：1.00</s:String>
     <s:String x:Key="build">开发环境：64-bit Windows 10 Visual Studio 2017</s:String>

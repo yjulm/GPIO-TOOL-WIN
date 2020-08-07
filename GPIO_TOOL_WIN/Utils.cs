@@ -4,9 +4,9 @@ using System.Windows;
 
 namespace GPIO_TOOL_WIN
 {
-    class Utils
+    internal class Utils
     {
-        //把byte转化成2进制字符串 
+        //把byte转化成2进制字符串
         public static String ByteToBinaryStr(byte b)
         {
             String result = "";
@@ -51,7 +51,8 @@ namespace GPIO_TOOL_WIN
         public static bool VerificationNumber(ushort number)
         {
             bool result = false;
-            if (number ==0 || number == 1) {
+            if (number == 0 || number == 1)
+            {
                 result = true;
             }
             return result;
@@ -69,7 +70,8 @@ namespace GPIO_TOOL_WIN
             {
                 requestedCulture = @"Resources\en-us.xaml";
             }
-            else {
+            else
+            {
                 requestedCulture = @"Resources\zh-cn.xaml";
             }
             ResourceDictionary resourceDictionary = dictionaryList.Find(d => d.Source.OriginalString.Equals(requestedCulture));

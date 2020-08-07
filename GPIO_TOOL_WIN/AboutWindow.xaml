@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GPIO_TOOL_WIN"
         mc:Ignorable="d" Icon="Resources\chip.png"
-        Title="About" Height="300" Width="400" ResizeMode="NoResize" >
+        Title="About" Height="300" Width="400" ResizeMode="NoResize">
     <Grid>
         <RichTextBox HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top" Height="230" Width="340" IsReadOnly="True">
             <FlowDocument>
@@ -14,18 +14,16 @@
                         <TextBlock TextWrapping="Wrap" Text="{DynamicResource app_name}" TextAlignment="Center" Width="328" FontSize="14" FontWeight="Bold" />
                     </InlineUIContainer>
                     <InlineUIContainer>
-                        <TextBlock TextWrapping="Wrap" Margin="0,10" Text="{DynamicResource app_version}" TextAlignment="Center" Width="328" FontSize="14"/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,10" Text="{DynamicResource app_version}" TextAlignment="Center" Width="328" FontSize="14" />
                     </InlineUIContainer>
                     <InlineUIContainer>
-                        <TextBlock TextWrapping="Wrap" Margin="0,10" Text="{DynamicResource build}" TextAlignment="Center" Width="328" FontSize="14"/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,10" Text="{DynamicResource build}" TextAlignment="Center" Width="328" FontSize="14" />
                     </InlineUIContainer>
                     <InlineUIContainer>
-                        <TextBlock TextWrapping="Wrap" Margin="0,10" Text="{DynamicResource copyright}" TextAlignment="Center" Width="328" FontSize="14"/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,10" Text="{DynamicResource copyright}" TextAlignment="Center" Width="328" FontSize="14" />
                     </InlineUIContainer>
                 </Paragraph>
             </FlowDocument>
-
         </RichTextBox>
-
     </Grid>
 </Window>

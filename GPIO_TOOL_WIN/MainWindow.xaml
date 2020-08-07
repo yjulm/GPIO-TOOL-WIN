@@ -35,79 +35,75 @@
             </Menu>
         </Grid>
 
-        <Image HorizontalAlignment="Center" Margin="0,25,0,0" VerticalAlignment="Top" 
-               Source="Resources\it87_gpio.png" Width="500" Height="101"/>
-        
         <Grid x:Name="GP_title" Height="23" Width="400" Margin="5,167,0,5" VerticalAlignment="Top">
-            <TextBox Name="gp80_t" Text="GP80" HorizontalAlignment="Left" Width="50" Height="23" IsReadOnly="True"
+            <TextBox Name="gp60_t" Text="gp60" HorizontalAlignment="Left" Width="50" Height="23" IsReadOnly="True"
                              VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#FFF1F1F1" />
-            <TextBox Name="gp81_t" Text="GP81" HorizontalAlignment="Left" Width="50" Height="23"  Margin="50,0,0,0" IsReadOnly="True"
-                             VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#FFF1F1F1"/>
-            <TextBox Name="gp82_t" Text="GP82" HorizontalAlignment="Left" Width="50" Height="23"  Margin="100,0,0,0" IsReadOnly="True"
-                             VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#FFF1F1F1"/>
-            <TextBox Name="gp83_t" Text="GP83" HorizontalAlignment="Left" Width="50" Height="23"  Margin="150,0,0,0" IsReadOnly="True"
-                             VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#FFF1F1F1"/>
-            <TextBox Name="gp84_t" Text="GP84" HorizontalAlignment="Left" Width="50" Height="23"  Margin="200,0,0,0" IsReadOnly="True"
-                             VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#FFF1F1F1"/>
-            <TextBox Name="gp85_t" Text="GP85" HorizontalAlignment="Left" Width="50" Height="23"  Margin="250,0,0,0" IsReadOnly="True"
-                             VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#FFF1F1F1"/>
-            <TextBox Name="gp86_t" Text="GP86" HorizontalAlignment="Left" Width="50" Height="23"  Margin="300,0,0,0" IsReadOnly="True"
-                             VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#FFF1F1F1"/>
-            <TextBox Name="gp87_t" Text="GP87" HorizontalAlignment="Left" Width="50" Height="23"  Margin="350,0,0,0" IsReadOnly="True"
-                             VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#FFF1F1F1"/>
+            <TextBox Name="gp61_t" Text="gp61" HorizontalAlignment="Left" Width="50" Height="23"  Margin="50,0,0,0" IsReadOnly="True"
+                             VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#FFF1F1F1" />
+            <TextBox Name="gp62_t" Text="gp62" HorizontalAlignment="Left" Width="50" Height="23"  Margin="100,0,0,0" IsReadOnly="True"
+                             VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#FFF1F1F1" />
+            <TextBox Name="gp63_t" Text="gp63" HorizontalAlignment="Left" Width="50" Height="23"  Margin="150,0,0,0" IsReadOnly="True"
+                             VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#FFF1F1F1" />
+            <TextBox Name="gp64_t" Text="gp64" HorizontalAlignment="Left" Width="50" Height="23"  Margin="200,0,0,0" IsReadOnly="True"
+                             VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="Red" />
+            <TextBox Name="gp65_t" Text="gp65" HorizontalAlignment="Left" Width="50" Height="23"  Margin="250,0,0,0" IsReadOnly="True"
+                             VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#FFF1F1F1" />
+            <TextBox Name="gp66_t" Text="gp66" HorizontalAlignment="Left" Width="50" Height="23"  Margin="300,0,0,0" IsReadOnly="True"
+                             VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="Yellow" />
+            <TextBox Name="gp67_t" Text="gp67" HorizontalAlignment="Left" Width="50" Height="23"  Margin="350,0,0,0" IsReadOnly="True"
+                             VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#FFF1F1F1" />
         </Grid>
-        
+
         <Grid x:Name="gpio_mode_grid"  Margin="24,190,0,0" HorizontalAlignment="Center" Width="518" Height="23" VerticalAlignment="Top">
-            <Label Content="{DynamicResource mode}" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="70" Height="23" Margin="-20,0,0,0"/>
-            <TextBox Name="gp80" HorizontalAlignment="Left" Width="50" Height="23" Margin="50,0,0,0" 
+            <Label Content="{DynamicResource mode}" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="70" Height="23" Margin="-20,0,0,0" />
+            <TextBox Name="gp60" HorizontalAlignment="Left" Width="50" Height="23" Margin="50,0,0,0" IsReadOnly="True"
                              VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-            <TextBox Name="gp81" HorizontalAlignment="Left" Width="50" Height="23" Margin="100,0,0,0" 
+            <TextBox Name="gp61" HorizontalAlignment="Left" Width="50" Height="23" Margin="100,0,0,0" IsReadOnly="True"
                              VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-            <TextBox Name="gp82" HorizontalAlignment="Left" Width="50" Height="23" Margin="150,0,0,0" 
+            <TextBox Name="gp62" HorizontalAlignment="Left" Width="50" Height="23" Margin="150,0,0,0" IsReadOnly="True"
                              VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-            <TextBox Name="gp83" HorizontalAlignment="Left" Width="50" Height="23" Margin="200,0,0,0"  
+            <TextBox Name="gp63" HorizontalAlignment="Left" Width="50" Height="23" Margin="200,0,0,0"
                              VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-            <TextBox Name="gp84" HorizontalAlignment="Left" Width="50" Height="23" Margin="250,0,0,0" 
+            <TextBox Name="gp64" HorizontalAlignment="Left" Width="50" Height="23" Margin="250,0,0,0"
                              VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-            <TextBox Name="gp85" HorizontalAlignment="Left" Width="50" Height="23" Margin="300,0,0,0" 
+            <TextBox Name="gp65" HorizontalAlignment="Left" Width="50" Height="23" Margin="300,0,0,0" IsReadOnly="True"
                              VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-            <TextBox Name="gp86" HorizontalAlignment="Left" Width="50" Height="23" Margin="350,0,0,0" 
+            <TextBox Name="gp66" HorizontalAlignment="Left" Width="50" Height="23" Margin="350,0,0,0"
                              VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-            <TextBox Name="gp87" HorizontalAlignment="Left" Width="50" Height="23" Margin="400,0,0,0" 
+            <TextBox Name="gp67" HorizontalAlignment="Left" Width="50" Height="23" Margin="400,0,0,0"
                              VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
         </Grid>
         <Grid Name="gpio_value_grid"  Margin="24,213,0,0" HorizontalAlignment="Center" Width="518" Height="23" VerticalAlignment="Top">
-            <Label Content="{DynamicResource val}" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center"  Margin="-20,0,0,0" Width="70" Height="30"/>
-            <TextBox Name="gp80_out" HorizontalAlignment="Left" Width="50" Height="23" Margin="50,0,0,0" 
+            <Label Content="{DynamicResource val}" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center"  Margin="-20,0,0,0" Width="70" Height="30" />
+            <TextBox Name="gp60_out" HorizontalAlignment="Left" Width="50" Height="23" Margin="50,0,0,0"  IsReadOnly="True"
                                VerticalAlignment="Top" VerticalContentAlignment="Center"  HorizontalContentAlignment="Center" />
-            <TextBox Name="gp81_out" HorizontalAlignment="Left" Width="50" Height="23" Margin="100,0,0,0" 
+            <TextBox Name="gp61_out" HorizontalAlignment="Left" Width="50" Height="23" Margin="100,0,0,0" IsReadOnly="True"
                              VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-            <TextBox Name="gp82_out" HorizontalAlignment="Left" Width="50" Height="23" Margin="150,0,0,0" 
+            <TextBox Name="gp62_out" HorizontalAlignment="Left" Width="50" Height="23" Margin="150,0,0,0" IsReadOnly="True"
                              VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-            <TextBox Name="gp83_out" HorizontalAlignment="Left" Width="50" Height="23" Margin="200,0,0,0" 
+            <TextBox Name="gp63_out" HorizontalAlignment="Left" Width="50" Height="23" Margin="200,0,0,0"
                              VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-            <TextBox Name="gp84_out" HorizontalAlignment="Left" Width="50" Height="23" Margin="250,0,0,0" 
+            <TextBox Name="gp64_out" HorizontalAlignment="Left" Width="50" Height="23" Margin="250,0,0,0"
                              VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-            <TextBox Name="gp85_out" HorizontalAlignment="Left" Width="50" Height="23" Margin="300,0,0,0" 
+            <TextBox Name="gp65_out" HorizontalAlignment="Left" Width="50" Height="23" Margin="300,0,0,0" IsReadOnly="True"
                              VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-            <TextBox Name="gp86_out" HorizontalAlignment="Left" Width="50" Height="23" Margin="350,0,0,0" 
+            <TextBox Name="gp66_out" HorizontalAlignment="Left" Width="50" Height="23" Margin="350,0,0,0"
                              VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-            <TextBox Name="gp87_out" HorizontalAlignment="Left" Width="50" Height="23" Margin="400,0,0,0" 
+            <TextBox Name="gp67_out" HorizontalAlignment="Left" Width="50" Height="23" Margin="400,0,0,0"
                              VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
         </Grid>
         <Grid HorizontalAlignment="Center" Margin="74,241,68,34" Width="400"  VerticalAlignment="Center" Height="74">
-            <Label Content="{DynamicResource gp_mode}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Label Content="{DynamicResource gp_mode}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
             <TextBox x:Name="mode_val" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="23" Width="120"
                              Margin="150,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" />
-            <Button x:Name="mode_btn" Content="{DynamicResource set_mode}" HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="Mode_Click"/>
-            <Label Content="{DynamicResource gp_val}" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="mode_btn" Content="{DynamicResource set_mode}" HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="Mode_Click" />
+            <Label Content="{DynamicResource gp_val}" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" />
             <TextBox x:Name="out_val" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="23" Width="120"
                              Margin="150,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" />
-            <Button x:Name="out_btn" Content="{DynamicResource set_val}" HorizontalAlignment="Left" Margin="300,40,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="Out_Click"/>
+            <Button x:Name="out_btn" Content="{DynamicResource set_val}" HorizontalAlignment="Left" Margin="300,40,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="Out_Click" />
         </Grid>
         <Label x:Name="chip_name" Content="{DynamicResource chip_name}" HorizontalAlignment="Left" Margin="24,316,0,0" VerticalAlignment="Top" Visibility="Hidden" />
         <Label x:Name="chip_type" Content="" HorizontalAlignment="Left" Margin="85,316,0,0" VerticalAlignment="Top" Visibility="Hidden" />
         <Label x:Name="error" Content="{DynamicResource error}" HorizontalAlignment="Left" Margin="24,316,0,0" VerticalAlignment="Top" Visibility="Hidden" Foreground="Red" />
-        
     </Grid>
 </Window>

@@ -15,83 +15,82 @@ namespace OpenLibSys
 {
     public class Ols : IDisposable
     {
-        const string dllNameX64 = "WinRing0x64.dll";
-        const string dllName    = "WinRing0.dll";
+        private const string dllNameX64 = "WinRing0x64.dll";
+        private const string dllName = "WinRing0.dll";
 
         // for this support library
         public enum Status
         {
-            NO_ERROR                                 = 0,
-            DLL_NOT_FOUND                            = 1,
-            DLL_INCORRECT_VERSION                    = 2,
-            DLL_INITIALIZE_ERROR                     = 3,
+            NO_ERROR = 0,
+            DLL_NOT_FOUND = 1,
+            DLL_INCORRECT_VERSION = 2,
+            DLL_INITIALIZE_ERROR = 3,
         }
 
         // for WinRing0
         public enum OlsDllStatus
         {
-            OLS_DLL_NO_ERROR                        = 0,
-            OLS_DLL_UNSUPPORTED_PLATFORM            = 1,
-            OLS_DLL_DRIVER_NOT_LOADED               = 2,
-            OLS_DLL_DRIVER_NOT_FOUND                = 3,
-            OLS_DLL_DRIVER_UNLOADED                 = 4,
-            OLS_DLL_DRIVER_NOT_LOADED_ON_NETWORK    = 5,
-            OLS_DLL_UNKNOWN_ERROR                   = 9
+            OLS_DLL_NO_ERROR = 0,
+            OLS_DLL_UNSUPPORTED_PLATFORM = 1,
+            OLS_DLL_DRIVER_NOT_LOADED = 2,
+            OLS_DLL_DRIVER_NOT_FOUND = 3,
+            OLS_DLL_DRIVER_UNLOADED = 4,
+            OLS_DLL_DRIVER_NOT_LOADED_ON_NETWORK = 5,
+            OLS_DLL_UNKNOWN_ERROR = 9
         }
 
         // for WinRing0
         public enum OlsDriverType
         {
-            OLS_DRIVER_TYPE_UNKNOWN                 = 0,
-            OLS_DRIVER_TYPE_WIN_9X			        = 1,
-            OLS_DRIVER_TYPE_WIN_NT			        = 2,
-            OLS_DRIVER_TYPE_WIN_NT4			        = 3,    // Obsolete
-            OLS_DRIVER_TYPE_WIN_NT_X64	    	    = 4,
-            OLS_DRIVER_TYPE_WIN_NT_IA64	    	    = 5
+            OLS_DRIVER_TYPE_UNKNOWN = 0,
+            OLS_DRIVER_TYPE_WIN_9X = 1,
+            OLS_DRIVER_TYPE_WIN_NT = 2,
+            OLS_DRIVER_TYPE_WIN_NT4 = 3,    // Obsolete
+            OLS_DRIVER_TYPE_WIN_NT_X64 = 4,
+            OLS_DRIVER_TYPE_WIN_NT_IA64 = 5
         }
 
         // for WinRing0
-        public enum OlsErrorPci : uint 
+        public enum OlsErrorPci : uint
         {
-            OLS_ERROR_PCI_BUS_NOT_EXIST		        = 0xE0000001,
-            OLS_ERROR_PCI_NO_DEVICE			        = 0xE0000002,
-            OLS_ERROR_PCI_WRITE_CONFIG		        = 0xE0000003,
-            OLS_ERROR_PCI_READ_CONFIG		        = 0xE0000004
+            OLS_ERROR_PCI_BUS_NOT_EXIST = 0xE0000001,
+            OLS_ERROR_PCI_NO_DEVICE = 0xE0000002,
+            OLS_ERROR_PCI_WRITE_CONFIG = 0xE0000003,
+            OLS_ERROR_PCI_READ_CONFIG = 0xE0000004
         }
 
         // Bus Number, Device Number and Function Number to PCI Device Address
         public uint PciBusDevFunc(uint bus, uint dev, uint func)
         {
-            return ((bus&0xFF)<<8) | ((dev&0x1F)<<3) | (func&7);
+            return ((bus & 0xFF) << 8) | ((dev & 0x1F) << 3) | (func & 7);
         }
 
         // PCI Device Address to Bus Number
         public uint PciGetBus(uint address)
         {
-            return ((address>>8) & 0xFF);
+            return ((address >> 8) & 0xFF);
         }
 
         // PCI Device Address to Device Number
         public uint PciGetDev(uint address)
         {
-            return ((address>>3) & 0x1F);
+            return ((address >> 3) & 0x1F);
         }
 
         // PCI Device Address to Function Number
         public uint PciGetFunc(uint address)
         {
-            return (address&7);
+            return (address & 7);
         }
 
         [DllImport("kernel32")]
         public extern static IntPtr LoadLibrary(string lpFileName);
 
-
         [DllImport("kernel32", SetLastError = true)]
         private static extern bool FreeLibrary(IntPtr hModule);
 
         [DllImport("kernel32", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = false)]
-        private static extern IntPtr GetProcAddress(IntPtr hModule, [MarshalAs(UnmanagedType.LPStr)]  string lpProcName);
+        private static extern IntPtr GetProcAddress(IntPtr hModule, [MarshalAs(UnmanagedType.LPStr)] string lpProcName);
 
         private IntPtr module = IntPtr.Zero;
         private uint status = (uint)Status.NO_ERROR;
@@ -123,7 +122,7 @@ namespace OpenLibSys
 
                 InitializeOls = (_InitializeOls)GetDelegate("InitializeOls", typeof(_InitializeOls));
                 DeinitializeOls = (_DeinitializeOls)GetDelegate("DeinitializeOls", typeof(_DeinitializeOls));
-                
+
                 IsCpuid = (_IsCpuid)GetDelegate("IsCpuid", typeof(_IsCpuid));
                 IsMsr = (_IsMsr)GetDelegate("IsMsr", typeof(_IsMsr));
                 IsTsc = (_IsTsc)GetDelegate("IsTsc", typeof(_IsTsc));
@@ -181,7 +180,7 @@ namespace OpenLibSys
                 ReadPhysicalMemory = (_ReadPhysicalMemory)GetDelegate("ReadPhysicalMemory", typeof(_ReadPhysicalMemory));
                 WritePhysicalMemory = (_WritePhysicalMemory)GetDelegate("WritePhysicalMemory", typeof(_WritePhysicalMemory));
 #endif
-                if (! (
+                if (!(
                    GetDllStatus != null
                 && GetDllVersion != null
                 && GetDriverVersion != null
@@ -220,7 +219,7 @@ namespace OpenLibSys
                 && WriteIoPortDword != null
                 && WriteIoPortByteEx != null
                 && WriteIoPortWordEx != null
-                && WriteIoPortDwordEx != null 
+                && WriteIoPortDwordEx != null
                 && SetPciMaxBusIndex != null
                 && ReadPciConfigByte != null
                 && ReadPciConfigWord != null
@@ -285,11 +284,15 @@ namespace OpenLibSys
         // DLL Information
         //-----------------------------------------------------------------------------
         public delegate uint _GetDllStatus();
+
         public delegate uint _GetDllVersion(ref byte major, ref byte minor, ref byte revision, ref byte release);
+
         public delegate uint _GetDriverVersion(ref byte major, ref byte minor, ref byte revision, ref byte release);
+
         public delegate uint _GetDriverType();
 
         public delegate int _InitializeOls();
+
         public delegate void _DeinitializeOls();
 
         public _GetDllStatus GetDllStatus = null;
@@ -304,25 +307,45 @@ namespace OpenLibSys
         // CPU
         //-----------------------------------------------------------------------------
         public delegate int _IsCpuid();
+
         public delegate int _IsMsr();
+
         public delegate int _IsTsc();
+
         public delegate int _Hlt();
+
         public delegate int _HltTx(UIntPtr threadAffinityMask);
+
         public delegate int _HltPx(UIntPtr processAffinityMask);
+
         public delegate int _Rdmsr(uint index, ref uint eax, ref uint edx);
+
         public delegate int _RdmsrTx(uint index, ref uint eax, ref uint edx, UIntPtr threadAffinityMask);
+
         public delegate int _RdmsrPx(uint index, ref uint eax, ref uint edx, UIntPtr processAffinityMask);
+
         public delegate int _Wrmsr(uint index, uint eax, uint edx);
+
         public delegate int _WrmsrTx(uint index, uint eax, uint edx, UIntPtr threadAffinityMask);
+
         public delegate int _WrmsrPx(uint index, uint eax, uint edx, UIntPtr processAffinityMask);
+
         public delegate int _Rdpmc(uint index, ref uint eax, ref uint edx);
+
         public delegate int _RdpmcTx(uint index, ref uint eax, ref uint edx, UIntPtr threadAffinityMask);
+
         public delegate int _RdpmcPx(uint index, ref uint eax, ref uint edx, UIntPtr processAffinityMask);
+
         public delegate int _Cpuid(uint index, ref uint eax, ref uint ebx, ref uint ecx, ref uint edx);
+
         public delegate int _CpuidTx(uint index, ref uint eax, ref uint ebx, ref uint ecx, ref uint edx, UIntPtr threadAffinityMask);
+
         public delegate int _CpuidPx(uint index, ref uint eax, ref uint ebx, ref uint ecx, ref uint edx, UIntPtr processAffinityMask);
+
         public delegate int _Rdtsc(ref uint eax, ref uint edx);
+
         public delegate int _RdtscTx(ref uint eax, ref uint edx, UIntPtr threadAffinityMask);
+
         public delegate int _RdtscPx(ref uint eax, ref uint edx, UIntPtr processAffinityMask);
 
         public _IsCpuid IsCpuid = null;
@@ -351,29 +374,41 @@ namespace OpenLibSys
         // I/O
         //-----------------------------------------------------------------------------
         public delegate byte _ReadIoPortByte(ushort port);
+
         public delegate ushort _ReadIoPortWord(ushort port);
+
         public delegate uint _ReadIoPortDword(ushort port);
+
         public _ReadIoPortByte ReadIoPortByte;
         public _ReadIoPortWord ReadIoPortWord;
         public _ReadIoPortDword ReadIoPortDword;
 
         public delegate int _ReadIoPortByteEx(ushort port, ref byte value);
+
         public delegate int _ReadIoPortWordEx(ushort port, ref ushort value);
+
         public delegate int _ReadIoPortDwordEx(ushort port, ref uint value);
+
         public _ReadIoPortByteEx ReadIoPortByteEx;
         public _ReadIoPortWordEx ReadIoPortWordEx;
         public _ReadIoPortDwordEx ReadIoPortDwordEx;
-    
+
         public delegate void _WriteIoPortByte(ushort port, byte value);
+
         public delegate void _WriteIoPortWord(ushort port, ushort value);
+
         public delegate void _WriteIoPortDword(ushort port, uint value);
+
         public _WriteIoPortByte WriteIoPortByte;
         public _WriteIoPortWord WriteIoPortWord;
         public _WriteIoPortDword WriteIoPortDword;
 
         public delegate int _WriteIoPortByteEx(ushort port, byte value);
+
         public delegate int _WriteIoPortWordEx(ushort port, ushort value);
+
         public delegate int _WriteIoPortDwordEx(ushort port, uint value);
+
         public _WriteIoPortByteEx WriteIoPortByteEx;
         public _WriteIoPortWordEx WriteIoPortWordEx;
         public _WriteIoPortDwordEx WriteIoPortDwordEx;
@@ -382,38 +417,53 @@ namespace OpenLibSys
         // PCI
         //-----------------------------------------------------------------------------
         public delegate void _SetPciMaxBusIndex(byte max);
+
         public _SetPciMaxBusIndex SetPciMaxBusIndex;
 
         public delegate byte _ReadPciConfigByte(uint pciAddress, byte regAddress);
+
         public delegate ushort _ReadPciConfigWord(uint pciAddress, byte regAddress);
+
         public delegate uint _ReadPciConfigDword(uint pciAddress, byte regAddress);
+
         public _ReadPciConfigByte ReadPciConfigByte;
         public _ReadPciConfigWord ReadPciConfigWord;
         public _ReadPciConfigDword ReadPciConfigDword;
 
         public delegate int _ReadPciConfigByteEx(uint pciAddress, uint regAddress, ref byte value);
+
         public delegate int _ReadPciConfigWordEx(uint pciAddress, uint regAddress, ref ushort value);
+
         public delegate int _ReadPciConfigDwordEx(uint pciAddress, uint regAddress, ref uint value);
+
         public _ReadPciConfigByteEx ReadPciConfigByteEx;
         public _ReadPciConfigWordEx ReadPciConfigWordEx;
         public _ReadPciConfigDwordEx ReadPciConfigDwordEx;
 
         public delegate void _WritePciConfigByte(uint pciAddress, byte regAddress, byte value);
+
         public delegate void _WritePciConfigWord(uint pciAddress, byte regAddress, ushort value);
+
         public delegate void _WritePciConfigDword(uint pciAddress, byte regAddress, uint value);
+
         public _WritePciConfigByte WritePciConfigByte;
         public _WritePciConfigWord WritePciConfigWord;
         public _WritePciConfigDword WritePciConfigDword;
 
         public delegate int _WritePciConfigByteEx(uint pciAddress, uint regAddress, byte value);
+
         public delegate int _WritePciConfigWordEx(uint pciAddress, uint regAddress, ushort value);
+
         public delegate int _WritePciConfigDwordEx(uint pciAddress, uint regAddress, uint value);
+
         public _WritePciConfigByteEx WritePciConfigByteEx;
         public _WritePciConfigWordEx WritePciConfigWordEx;
         public _WritePciConfigDwordEx WritePciConfigDwordEx;
-        
+
         public delegate uint _FindPciDeviceById(ushort vendorId, ushort deviceId, byte index);
+
         public delegate uint _FindPciDeviceByClass(byte baseClass, byte subClass, byte programIf, byte index);
+
         public _FindPciDeviceById FindPciDeviceById;
         public _FindPciDeviceByClass FindPciDeviceByClass;
 
